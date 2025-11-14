@@ -7,7 +7,7 @@ import { RiImageAddFill } from "react-icons/ri";
 
 export default async function ArtGallery() {
   const pictures = await getGalleryPictures();
-  const NEW_ART_FORM_URL = "#";
+  const NEW_ART_FORM_URL = "https://forms.gle/f9jwYsqABvwFXDcB8";
   
   return (
     <main
