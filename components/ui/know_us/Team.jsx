@@ -129,7 +129,7 @@ export default function Team({ team, className = "", ...props }) {
 
         {/* Members grid */}
         <div className={twJoin(
-          `relative p-6 pt-2 grid gap-6`,
+          `relative p-6 pt-2 grid gap-6 pb-[10rem]`,
           gridCols
         )}>
           {team.members?.map((member, index) => (
