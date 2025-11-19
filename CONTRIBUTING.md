@@ -63,4 +63,4 @@ git push origin feature/your-feature-name
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the [MIT License](./LICENSE.md).
+By contributing, you agree that your contributions will be licensed under the [Provided License](./LICENSE.md).

@@ -3,6 +3,8 @@ import saranda_logo_img from "@/public/images/saranda_logo.png"
 import AboutSEctionAnimation from "../../gsapanimations/AboutSectionAnimation";
 import { twJoin } from "tailwind-merge";
 import SocialLinks from "@/components/layout/SocialLinks";
+import wooden_plank_img from "@/public/images/wooden_plank.png";
+
 
 export default function AboutSection({
   className = "",
@@ -32,9 +34,16 @@ export default function AboutSection({
           relative max-md:h-full overflow-clip max-md:items-start`,
           innerClassName
         )}
-        style={{ direction: "rtl" }}
+        style={{ direction: "rtl", }}
         {...innerProps}
       >
+        <Image
+          src={wooden_plank_img}
+          alt=""
+          placeholder="blur"
+          fill
+          className="-z-1"
+        />
         <div
           id={about_content_container_id}
           className={`

@@ -11,7 +11,7 @@ export default function NonHeroSections({
   return <>
     <main
       className={twJoin(
-        "relative",
+        "relative py-[10rem]",
         className
       )}
       id="non_hero_sections_id"
@@ -31,6 +31,11 @@ export default function NonHeroSections({
         ></Image>
       </div>
       <LoneTreeSlidingAnimation/>
+      <div
+        className="
+          absolute inset-0 bg-linear-to-b from-[#d1ccb0] via-[#d1ccb0]/80 to-[#faf6e6]/0 h-[10rem]
+        "
+      ></div>
       {children}
     </main>
   </>

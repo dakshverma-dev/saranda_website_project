@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ForestBackground() {
+export default function AnimatedForestParticleEffects() {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
 

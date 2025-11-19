@@ -2,6 +2,7 @@ import Image from "next/image"
 import { twJoin } from "tailwind-merge";
 import { getCommunityCards } from "@/lib/cmsdata";
 import Button from "../Button";
+import wooden_plank_img from "@/public/images/wooden_plank.png";
 
 
 export default async function CommunitiesSection({
@@ -25,11 +26,18 @@ export default async function CommunitiesSection({
       <div
         className={twJoin(
           `green-glass-container w-full lg:w-8/10 max-md:min-h-full
-          min-h-[80vh] py-[4rem] px-[2rem]`,
+          min-h-[80vh] py-[4rem] px-[2rem] relative overflow-clip`,
           innerClassName
         )}
         {...innerProps}
       >
+        <Image
+          src={wooden_plank_img}
+          alt=""
+          placeholder="blur"
+          fill
+          className="-z-1"
+        />
         <h2 className="text-center self-center mb-[2rem]">
           Our Communities
         </h2>

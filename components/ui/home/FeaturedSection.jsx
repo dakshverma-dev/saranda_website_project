@@ -2,6 +2,7 @@ import Image from "next/image";
 import Button from "../Button";
 import { twJoin } from "tailwind-merge";
 import { getFeaturedPhotos } from "@/lib/cmsdata";
+import wooden_plank_img from "@/public/images/wooden_plank.png";
 
 
 export default async function FeaturedSection({
@@ -82,8 +83,15 @@ function CTAContainer({className="", ...props}) {
     >
       <div className="
         h-50 w-50 xl:w-60 xl:h-60 green-glass-container rotate-45
-        flex justify-center items-center z-10 lg:scale-110
+        flex justify-center items-center z-10 lg:scale-110 overflow-clip
       ">
+        <Image
+          src={wooden_plank_img}
+          alt=""
+          placeholder="blur"
+          fill
+          className="-z-1"
+        />
         <div className="
           -rotate-45 w-9/10 h-1/2 text-center
           text-neutral-light flex flex-col justify-center items-center

@@ -9,6 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+
 export default function Team({ team, className = "", ...props }) {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
@@ -105,7 +106,7 @@ export default function Team({ team, className = "", ...props }) {
         </div>
 
         {/* Top accent border */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/60 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-secondary/60 to-transparent" />
         
         {/* Title section with 3D effect */}
         <div 
@@ -116,7 +117,7 @@ export default function Team({ team, className = "", ...props }) {
             <h3 className="text-secondary-ligher mb-3">
               {team.name}
             </h3>
-            <div className="h-px bg-gradient-to-r from-transparent via-secondary/50 to-transparent" />
+            <div className="h-px bg-linear-to-r from-transparent via-secondary/50 to-transparent" />
           </div>
           
           <div className="mt-6 flex justify-center gap-2">
@@ -128,7 +129,7 @@ export default function Team({ team, className = "", ...props }) {
 
         {/* Members grid */}
         <div className={twJoin(
-          `relative p-6 pt-2 grid gap-6`,
+          `relative p-6 pt-2 grid gap-6 pb-[10rem]`,
           gridCols
         )}>
           {team.members?.map((member, index) => (
@@ -137,7 +138,7 @@ export default function Team({ team, className = "", ...props }) {
         </div>
 
         {/* Bottom accent border */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
       </div>
     </section>
   );
@@ -167,7 +168,7 @@ function Member({ member, index, className = "", ...props }) {
       ref={cardRef}
       className={twJoin(
         `member-card group relative flex flex-col cursor-pointer`,
-        `bg-gradient-to-br from-neutral-light/98 via-neutral-light-lighter/95 to-neutral-light/98`,
+        `bg-linear-to-br from-neutral-light/98 via-neutral-light-lighter/95 to-neutral-light/98`,
         `rounded-2xl overflow-hidden text-center`,
         `border border-primary/15 hover:border-secondary/60`,
         `shadow-[0_10px_30px_rgba(0,0,0,0.35)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)]`,
@@ -187,20 +188,20 @@ function Member({ member, index, className = "", ...props }) {
         />
         
         {/* Professional gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary-darker/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-linear-to-t from-primary-darker/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
         {/* Subtle shine effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/0 to-transparent group-hover:via-white/10 transition-all duration-700" />
+        <div className="absolute inset-0 bg-linear-to-br from-transparent via-white/0 to-transparent group-hover:via-white/10 transition-all duration-700" />
       </div>
 
       {/* Member info */}
-      <div className="relative p-5 bg-gradient-to-b from-neutral-light to-neutral-light-lighter">
+      <div className="relative p-5 bg-linear-to-b from-neutral-light to-neutral-light-lighter">
         <p className="font-semibold text-primary-darker text-base mb-2 group-hover:text-primary transition-colors duration-300">
           {member.fullname}
         </p>
         {member.position && (
           <div className="space-y-1">
-            <div className="w-8 h-px bg-gradient-to-r from-primary/40 to-transparent mx-auto" />
+            <div className="w-8 h-px bg-linear-to-r from-primary/40 to-transparent mx-auto" />
             <p className="text-xs text-neutral-dark-lighter tracking-wide uppercase">
               {member.position}
             </p>
@@ -255,12 +256,12 @@ function Member({ member, index, className = "", ...props }) {
 
       {/* Premium corner accents */}
       <div className="absolute top-3 right-3 w-6 h-6 opacity-0 group-hover:opacity-100 transition-all duration-300">
-        <div className="absolute top-0 right-0 w-4 h-px bg-gradient-to-l from-secondary/50 to-transparent" />
-        <div className="absolute top-0 right-0 w-px h-4 bg-gradient-to-t from-secondary/50 to-transparent" />
+        <div className="absolute top-0 right-0 w-4 h-px bg-linear-to-l from-secondary/50 to-transparent" />
+        <div className="absolute top-0 right-0 w-px h-4 bg-linear-to-t from-secondary/50 to-transparent" />
       </div>
       <div className="absolute bottom-3 left-3 w-6 h-6 opacity-0 group-hover:opacity-100 transition-all duration-300">
-        <div className="absolute bottom-0 left-0 w-4 h-px bg-gradient-to-r from-secondary/50 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-px h-4 bg-gradient-to-b from-secondary/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-4 h-px bg-linear-to-r from-secondary/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-px h-4 bg-linear-to-b from-secondary/50 to-transparent" />
       </div>
     </div>
   );
