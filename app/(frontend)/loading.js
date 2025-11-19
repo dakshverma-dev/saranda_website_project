@@ -12,7 +12,8 @@ export default function Loading() {
         src={logo_mark}
         alt="Saranda"
         width={128}
-        className="animate-bounce"
+        sizes="8vw"
+        className="animate-bounce bg-black rounded-full"
       />
       <h1>ading...</h1>
     </div>
