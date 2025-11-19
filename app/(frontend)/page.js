@@ -3,8 +3,9 @@ import AboutSection from "@/components/ui/home/AboutSection";
 import Hero from "@/components/ui/home/Hero";
 import FeaturedSection from "@/components/ui/home/FeaturedSection";
 import CommunitiesSection from "@/components/ui/home/CommunitiesSection";
+import { resolve } from "styled-jsx/css";
 
-export default function Home() {
+export default async function Home() {
   return <>
     <Hero />
     <DivForTransition />
