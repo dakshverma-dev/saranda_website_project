@@ -40,7 +40,7 @@ export default function Hero({className, ...props}) {
             uppercase -translate-y-15/100 animate-heroslidedown
           "
         >
-          <h1 className="mb-[-0.4ch]">Saranda</h1>
+          <h1 className="-mb-[15px]">Saranda</h1>
           <p className="text-base lg:text-xl font-bold">
             THE HOUSE OF EXCELLENCE AND INNOVATION
           </p>

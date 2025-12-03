@@ -4,6 +4,7 @@ import event from "./event"
 import meetup from "./meetup"
 import extra_footer_links from "./extra_footer_links"
 import community from "./community"
+import links from "./links"
 
 export const schema = {
   types: [
@@ -13,5 +14,6 @@ export const schema = {
     meetup,
     extra_footer_links,
     community,
+    links
   ],
 }
