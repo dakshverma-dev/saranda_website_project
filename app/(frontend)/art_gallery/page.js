@@ -1,8 +1,11 @@
-import { getGalleryPictures } from "@/lib/cmsdata";
+"use client";
+
+import { useState } from "react";
 import Button from "@/components/ui/Button";
 import { RiImageAddFill } from "react-icons/ri";
 import Image from "next/image";
 import bg3 from "@/public/images/bg3.jpg";
+import PhotoOverlay from "@/components/ui/PhotoOverlay";
 
 const indianNames = [
   "Aarav Sharma", "Diya Patel", "Arjun Singh", "Ananya Gupta", "Vivaan Kumar",
@@ -11,12 +14,93 @@ const indianNames = [
   "Reyansh Agarwal", "Aarohi Banerjee", "Atharv Iyer", "Avni Pandey", "Shaurya Saxena"
 ];
 
-export default async function ArtGallery() {
-  const pictures = await getGalleryPictures();
+export default function ArtGallery() {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
+  // Dummy data for testing
+  const pictures = {
+    images: [
+      { caption: "Abstract Digital Art" },
+      { caption: "Sunset Over Mountains" },
+      { caption: "Urban Street Photography" },
+      { caption: "Portrait Study" },
+      { caption: "Nature Landscape" },
+      { caption: "Colorful Illustration" },
+      { caption: "Modern Architecture" },
+      { caption: "Creative Typography" },
+    ],
+    img: [
+      {
+        src: "https://picsum.photos/seed/art1/400/600",
+        overlay_src: "https://picsum.photos/seed/art1/1200/1800",
+        width: 400,
+        height: 600,
+        placeholder: "blur",
+        blurDataURL: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAKAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==",
+      },
+      {
+        src: "https://picsum.photos/seed/art2/400/500",
+        overlay_src: "https://picsum.photos/seed/art2/1200/1500",
+        width: 400,
+        height: 500,
+        placeholder: "blur",
+        blurDataURL: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAKAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==",
+      },
+      {
+        src: "https://picsum.photos/seed/art3/400/550",
+        overlay_src: "https://picsum.photos/seed/art3/1200/1650",
+        width: 400,
+        height: 550,
+        placeholder: "blur",
+        blurDataURL: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAKAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==",
+      },
+      {
+        src: "https://picsum.photos/seed/art4/400/450",
+        overlay_src: "https://picsum.photos/seed/art4/1200/1350",
+        width: 400,
+        height: 450,
+        placeholder: "blur",
+        blurDataURL: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAKAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==",
+      },
+      {
+        src: "https://picsum.photos/seed/art5/400/580",
+        overlay_src: "https://picsum.photos/seed/art5/1200/1740",
+        width: 400,
+        height: 580,
+        placeholder: "blur",
+        blurDataURL: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAKAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==",
+      },
+      {
+        src: "https://picsum.photos/seed/art6/400/520",
+        overlay_src: "https://picsum.photos/seed/art6/1200/1560",
+        width: 400,
+        height: 520,
+        placeholder: "blur",
+        blurDataURL: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAKAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==",
+      },
+      {
+        src: "https://picsum.photos/seed/art7/400/480",
+        overlay_src: "https://picsum.photos/seed/art7/1200/1440",
+        width: 400,
+        height: 480,
+        placeholder: "blur",
+        blurDataURL: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAKAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==",
+      },
+      {
+        src: "https://picsum.photos/seed/art8/400/560",
+        overlay_src: "https://picsum.photos/seed/art8/1200/1680",
+        width: 400,
+        height: 560,
+        placeholder: "blur",
+        blurDataURL: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAKAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==",
+      },
+    ],
+  };
+// const pictures = await getGalleryPictures();
   const NEW_ART_FORM_URL = "https://forms.gle/f9jwYsqABvwFXDcB8";
 
   return (
-    <main className="relative min-h-screen pt-[8rem] pb-[5rem]">
+    <main className="relative min-h-screen pt-32 pb-20">
       {/* Fixed Background */}
       <div className="fixed inset-0 -z-10">
         <Image
@@ -30,7 +114,7 @@ export default async function ArtGallery() {
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-360 mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
@@ -61,7 +145,8 @@ export default async function ArtGallery() {
               return (
                 <div
                   key={index}
-                  className="break-inside-avoid mb-4 group relative overflow-hidden rounded-lg bg-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1"
+                  onClick={() => setSelectedIndex(index)}
+                  className="break-inside-avoid mb-4 group relative overflow-hidden rounded-lg bg-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 cursor-pointer"
                 >
                   <Image
                     src={pictures.img[index]?.src}
@@ -95,7 +180,15 @@ export default async function ArtGallery() {
           </div>
         )}
 
-        {/* Floating Submit Button */}
+        {/* Photo Overlay for fullscreen view */}
+        <PhotoOverlay
+          pictures={pictures.img}
+          captions={pictures.images?.map(p => p?.caption) || []}
+          selectedIndex={selectedIndex}
+          setSelectedIndex={setSelectedIndex}
+        
+
+        />
         <a
           href={NEW_ART_FORM_URL}
           target="_blank"
