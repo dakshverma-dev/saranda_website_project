@@ -10,7 +10,7 @@ export default async function Community({ params }) {
   const community = await getCommunity(slug);
   if (!community)
     return <main className="
-      min-h-[100vh] content-center items-center text-center p-[1rem]
+      min-h-screen content-center items-center text-center p-4
     ">
       <h1>404</h1>
       <p>The community you are looking for does not exits.</p>
