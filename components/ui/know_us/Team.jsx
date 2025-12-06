@@ -83,6 +83,11 @@ export default function Team({ team, className = "", ...props }) {
   const memberCount = team.members?.length || 0;
   const isLHC = memberCount === 8;
   const isWebops = memberCount === 6;
+  const organicTheme = isLHC
+    ? { base: "#4a3f35", moss: "#2d5016", accent: "#f8e41a" }
+    : isWebops
+    ? { base: "#2d5016", moss: "#1a4d2e", accent: "#f8e41a" }
+    : null;
   
   const gridCols = isLHC 
     ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4" 
@@ -94,44 +99,68 @@ export default function Team({ team, className = "", ...props }) {
     <section
       ref={sectionRef}
       className={twJoin(
-        `relative w-11/12 max-w-7xl mx-auto mb-24`,
+        `relative w-full md:w-11/12 max-w-7xl mx-auto mb-12 md:mb-24 px-4 md:px-0`,
         className
       )}
       {...props}
     >
-      {/* Main container with premium design */}
-      <div className="relative bg-primary-darker/75 backdrop-blur-xl rounded-3xl overflow-hidden border border-primary/35 shadow-[0_25px_70px_rgba(0,0,0,0.5)]">
+      {/* Forest-themed container */}
+      <div className="relative bg-gradient-to-br from-[#1a4d2e]/85 via-[#2d5016]/80 to-[#1a3825]/90 backdrop-blur-xl rounded-2xl md:rounded-3xl overflow-hidden border border-[#2d5016]/50 shadow-[0_18px_50px_rgba(0,0,0,0.5),0_0_40px_rgba(26,77,46,0.25)] md:shadow-[0_30px_80px_rgba(0,0,0,0.65),0_0_60px_rgba(26,77,46,0.28)]">
+        {organicTheme && <OrganicSectionFrame theme={organicTheme} />}
         
-        {/* Premium background pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(46,125,50,0.15)_0%,transparent_60%)]" />
+        {/* Organic forest patterns */}
+        <div className="absolute inset-0 opacity-15">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(248,228,26,0.1)_0%,transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(74,80,54,0.18)_0%,transparent_55%)]" />
+          <div className="absolute inset-0 bg-[conic-gradient(from_45deg_at_50%_50%,rgba(58,94,64,0.12),rgba(58,94,64,0.04),rgba(58,94,64,0.12))] mix-blend-overlay" />
         </div>
 
-        {/* Top accent border */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-secondary/60 to-transparent" />
+        {/* Ambient glow accents */}
+        <div className="absolute top-0 right-0 w-32 h-32 md:w-40 md:h-40 bg-[#f8e41a]/10 rounded-full blur-2xl md:blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-36 h-36 md:w-48 md:h-48 bg-[#2d5016]/25 rounded-full blur-2xl md:blur-3xl" />
+        <div className="absolute -bottom-6 right-12 w-44 h-20 bg-[radial-gradient(ellipse_at_center,rgba(106,139,85,0.3),transparent_60%)] blur-3xl" />
+
+        {/* Top nature border */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/70 to-transparent" />
         
-        {/* Title section with 3D effect */}
+        {/* Title section with forest essence */}
         <div 
           ref={titleRef}
-          className="relative p-10 pb-6 text-center"
+          className="relative p-6 md:p-10 pb-4 md:pb-6 text-center"
         >
-          <div className="inline-block">
-            <h3 className="text-secondary-ligher mb-3">
+          <div className="inline-block relative">
+            {/* Subtle glow */}
+            <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-primary/15 via-secondary/20 to-primary/15 blur-xl md:blur-2xl opacity-50" />
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[#f8e41a] drop-shadow-[0_0_8px_rgba(248,228,26,0.35)]">
+              <svg width="64" height="20" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 22c18-10 36-12 54-4s36 6 54-4" stroke="#f8e41a" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.7" />
+                <path d="M18 18c4-6 10-10 16-12" stroke="#2d5016" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.6" />
+                <path d="M94 18c-4-6-10-10-16-12" stroke="#2d5016" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.6" />
+              </svg>
+            </div>
+            
+            <h3 className="text-secondary-ligher mb-3 md:mb-4 relative drop-shadow-[0_0_10px_rgba(139,195,74,0.4)] md:drop-shadow-[0_0_15px_rgba(139,195,74,0.4)] text-2xl md:text-3xl lg:text-4xl">
               {team.name}
             </h3>
-            <div className="h-px bg-linear-to-r from-transparent via-secondary/50 to-transparent" />
-          </div>
-          
-          <div className="mt-6 flex justify-center gap-2">
-            {[...Array(memberCount)].map((_, i) => (
-              <div key={i} className="w-1.5 h-1.5 rounded-full bg-primary-lighter/50 animate-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
-            ))}
+            
+            {/* Organic divider with dots */}
+            <div className="flex items-center justify-center gap-1.5 md:gap-2">
+              <div className="w-10 md:w-12 h-px bg-gradient-to-r from-transparent to-secondary/60" />
+              {[...Array(Math.min(memberCount, 5))].map((_, i) => (
+                <div 
+                  key={i} 
+                  className="w-1.5 h-1.5 rounded-full bg-secondary/70 animate-pulse shadow-[0_0_6px_rgba(139,195,74,0.5)]" 
+                  style={{ animationDelay: `${i * 0.3}s` }} 
+                />
+              ))}
+              <div className="w-10 md:w-12 h-px bg-gradient-to-l from-transparent to-secondary/60" />
+            </div>
           </div>
         </div>
 
         {/* Members grid */}
         <div className={twJoin(
-          `relative p-6 pt-2 grid gap-6 pb-[10rem]`,
+          `relative p-4 md:p-6 pt-2 grid gap-4 md:gap-6 pb-[8rem] md:pb-[10rem]`,
           gridCols
         )}>
           {team.members?.map((member, index) => (
@@ -170,17 +199,17 @@ function Member({ member, index, className = "", ...props }) {
       ref={cardRef}
       className={twJoin(
         `member-card group relative flex flex-col cursor-pointer`,
-        `bg-linear-to-br from-neutral-light/98 via-neutral-light-lighter/95 to-neutral-light/98`,
-        `rounded-2xl overflow-hidden text-center`,
-        `border border-primary/15 hover:border-secondary/60`,
-        `shadow-[0_10px_30px_rgba(0,0,0,0.35)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)]`,
-        `transition-all duration-500 hover:scale-[1.03] hover:-translate-y-1`,
+        `bg-[linear-gradient(135deg,#f6f1e4_0%,#f1e8d8_45%,#e8ddc9_100%)]`,
+        `rounded-xl md:rounded-2xl overflow-hidden text-center`,
+        `border border-[#2d5016]/20 hover:border-[#f8e41a]/70`,
+        `shadow-[0_8px_25px_rgba(0,0,0,0.35),0_0_0_1px_rgba(248,228,26,0.08)] md:shadow-[0_12px_35px_rgba(0,0,0,0.4),0_0_0_1px_rgba(248,228,26,0.08)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.6),0_0_20px_rgba(248,228,26,0.25)] md:hover:shadow-[0_25px_50px_rgba(0,0,0,0.6),0_0_25px_rgba(248,228,26,0.25)]`,
+        `transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 md:hover:scale-[1.04] md:hover:-translate-y-2`,
         className
       )}
       {...props}
     >
       {/* Image container with professional effects */}
-      <div className="relative w-full aspect-square overflow-hidden bg-primary-darker/5">
+      <div className="relative w-full aspect-[3/4] md:aspect-square overflow-hidden bg-primary-darker/5">
         <Image
           {...member.img}
           alt={member.fullname}
@@ -194,24 +223,29 @@ function Member({ member, index, className = "", ...props }) {
         
         {/* Subtle shine effect */}
         <div className="absolute inset-0 bg-linear-to-br from-transparent via-white/0 to-transparent group-hover:via-white/10 transition-all duration-700" />
+        {/* Mossy edges */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-2 left-0 w-full h-6 bg-[radial-gradient(circle_at_50%_50%,rgba(74,80,54,0.25),transparent_60%)] blur-xl opacity-70" />
+          <div className="absolute -bottom-2 right-0 w-full h-6 bg-[radial-gradient(circle_at_50%_50%,rgba(45,80,22,0.2),transparent_60%)] blur-xl opacity-60" />
+        </div>
       </div>
 
       {/* Member info */}
-      <div className="relative p-5 bg-linear-to-b from-neutral-light to-neutral-light-lighter">
-        <p className="font-semibold text-primary-darker text-base mb-2 group-hover:text-primary transition-colors duration-300">
+      <div className="relative p-2.5 md:p-5 bg-linear-to-b from-neutral-light to-neutral-light-lighter">
+        <p className="font-semibold text-primary-darker text-sm md:text-base mb-1 md:mb-2 group-hover:text-primary transition-colors duration-300">
           {member.fullname}
         </p>
         {member.position && (
           <div className="space-y-1">
-            <div className="w-8 h-px bg-linear-to-r from-primary/40 to-transparent mx-auto" />
-            <p className="text-xs text-neutral-dark-lighter tracking-wide uppercase">
+            <div className="w-6 md:w-8 h-px bg-linear-to-r from-primary/40 to-transparent mx-auto" />
+            <p className="text-[10px] md:text-xs text-neutral-dark-lighter tracking-wide uppercase">
               {member.position}
             </p>
           </div>
         )}
         
         {/* Social Media Icons */}
-        <div className="pt-3 flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-1 group-hover:translate-y-0">
+        <div className="pt-2 md:pt-3 flex justify-center gap-1.5 md:gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-1 group-hover:translate-y-0">
           {member.email && (
             <SociaLinkIcon Icon={IoMdMail} href={"mailto:" + member.email} aria-label="GitHub"/>
           )}
@@ -252,4 +286,69 @@ function SociaLinkIcon({Icon, ...props}) {
       <Icon size={24}/>
     </Link>
   )
+}
+
+function OrganicSectionFrame({ theme }) {
+  return (
+    <>
+      {/* Soft bark arcs */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute -top-10 left-4 right-4 h-20 rounded-[999px] blur-2xl"
+          style={{ background: `radial-gradient(circle at 50% 50%, ${theme.base}55, transparent 65%)` }}
+        />
+        <div
+          className="absolute -bottom-10 left-8 right-8 h-24 rounded-[999px] blur-3xl"
+          style={{ background: `radial-gradient(circle at 50% 50%, ${theme.moss}50, transparent 70%)` }}
+        />
+      </div>
+
+      {/* Organic corner trims */}
+      <div className="absolute inset-0 pointer-events-none opacity-80">
+        <div
+          className="absolute top-3 left-3 w-14 h-14 rounded-[18px] border border-dashed"
+          style={{ borderColor: `${theme.accent}66` }}
+        />
+        <div
+          className="absolute top-4 right-4 w-10 h-10 rounded-[16px] border border-solid blur-[1px]"
+          style={{ borderColor: `${theme.moss}55` }}
+        />
+        <div
+          className="absolute bottom-4 left-4 w-10 h-10 rounded-[16px] border border-solid blur-[1px]"
+          style={{ borderColor: `${theme.moss}55` }}
+        />
+        <div
+          className="absolute bottom-3 right-3 w-14 h-14 rounded-[18px] border border-dashed"
+          style={{ borderColor: `${theme.accent}66` }}
+        />
+      </div>
+
+      {/* Firefly pulses */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(6)].map((_, i) => {
+          const positions = [
+            { top: "18%", left: "20%" },
+            { top: "12%", right: "22%" },
+            { top: "45%", left: "12%" },
+            { top: "58%", right: "16%" },
+            { bottom: "18%", left: "30%" },
+            { bottom: "12%", right: "26%" },
+          ];
+          const pos = positions[i];
+          return (
+            <div
+              key={i}
+              className="absolute w-2 h-2 rounded-full animate-pulse"
+              style={{
+                background: theme.accent,
+                boxShadow: `0 0 10px ${theme.accent}88`,
+                animationDelay: `${i * 0.3}s`,
+                ...pos,
+              }}
+            />
+          );
+        })}
+      </div>
+    </>
+  );
 }
