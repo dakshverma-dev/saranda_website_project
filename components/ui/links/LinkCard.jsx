@@ -2,7 +2,7 @@
 
 
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
+import { urlFor } from "@/lib/sanity/image";
 
 export default function LinkCard({ card }) {
   const { title, description, externalUrl, image } = card;

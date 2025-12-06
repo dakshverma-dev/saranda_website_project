@@ -1,6 +1,6 @@
 import { Roboto } from "next/font/google";
 import localFont from "next/font/local";
-import "./(frontend)/globals.css";
+import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Button from "@/components/ui/Button";

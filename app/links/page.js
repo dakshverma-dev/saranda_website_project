@@ -1,5 +1,5 @@
 // app/(frontend)/links/page.js
-import { client } from "@/sanity/lib/client"; 
+import { client } from "@/lib/sanity/client"; 
 import LinkCardGrid from "@/components/ui/links/LinkCardGrid";
 
 const linkCardsQuery = `
