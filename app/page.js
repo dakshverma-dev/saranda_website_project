@@ -19,7 +19,7 @@ export default async function Home() {
 function DivForTransition() {
   return (
     <div
-      className="w-full h-[5rem] bg-[#d1ccb0]"
+      className="w-full h-20 bg-[#d1ccb0]"
     ></div>
   )
 }

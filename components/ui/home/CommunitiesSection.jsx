@@ -72,7 +72,7 @@ function CommunityCard({
   >
     <div className="relative w-full aspect-square rounded-xl overflow-clip">
       <Image
-        {...card.img}
+        {...card.img.cropped}
         alt="Community Poster"
         fill
         sizes="(max-width: 768px) 100vw, 40vw"

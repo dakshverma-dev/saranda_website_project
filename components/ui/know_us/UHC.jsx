@@ -148,7 +148,7 @@ function Member({ member, index, className = "", ...props }) {
       {/* Member image */}
       <div className="relative h-96 overflow-hidden">
         <Image
-          {...member.img}
+          {...member.img.cropped}
           alt={member.fullname}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"

@@ -17,8 +17,8 @@ export default async function FeaturedSection({
     <section
       id="featured_section_id"
       className={twJoin(
-        `featured-section flex justify-center items-center relative h-[100vh]
-        my-[4rem]`,
+        `featured-section flex justify-center items-center relative h-screen
+        my-16`,
         className
       )}
       {...props}
@@ -60,7 +60,7 @@ function PhotoGrid({photos=[], className="", ...props}) {
           key={index}
         >
           <Image
-            {...img}
+            {...img.cropped}
             fill
             alt="Memorable Photo"
             sizes="(max-width: 1024px) 60vw, 40vw"

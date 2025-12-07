@@ -81,12 +81,14 @@ export default function ArtGalleryClient({ pictures }) {
                   className="break-inside-avoid mb-4 group relative overflow-hidden rounded-lg bg-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 cursor-pointer"
                 >
                   <Image
-                    src={pictures.img[index]?.src}
-                    alt={image.caption || `Art piece ${index + 1}`}
-                    width={pictures.img[index]?.width || 400}
-                    height={pictures.img[index]?.height || 400}
-                    placeholder={pictures.img[index]?.placeholder}
-                    blurDataURL={pictures.img[index]?.blurDataURL}
+                    // src={pictures.img[index]?.src}
+                    // alt={image.caption || `Art piece ${index + 1}`}
+                    // width={pictures.img[index]?.width || 400}
+                    // height={pictures.img[index]?.height || 400}
+                    // placeholder={pictures.img[index]?.placeholder}
+                    // blurDataURL={pictures.img[index]?.blurDataURL}
+                    {...pictures.img[index].uncropped}
+                    alt=""
                     className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                   />

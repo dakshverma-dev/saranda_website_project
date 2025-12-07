@@ -30,7 +30,7 @@ export default function PhotoOverlay({
       width = 800,
       height = 800,
       ...attr
-    } = pictures[safeIndex()];
+    } = pictures[safeIndex()].uncropped;
 
     return {
       src: overlay_src || src,
@@ -45,7 +45,7 @@ export default function PhotoOverlay({
       onClick={() => setSelectedIndex(-1)}
       className={twJoin(
         `fixed inset-0 bg-black/80 flex items-center justify-center z-50
-        text-neutral-light gap-[1rem] px-[1rem] flex-col select-none`,
+        text-neutral-light gap-4 px-4 flex-col select-none`,
         className,
         (selectedIndex == -1) && "hidden",
       )}
@@ -55,7 +55,7 @@ export default function PhotoOverlay({
         captions[selectedIndex]
         && <div
           className="
-            grid h-[80vh] w-[min(90vw,80rem)] max-md:overflow-y-auto gap-[1rem] 
+            grid h-[80vh] w-[min(90vw,80rem)] max-md:overflow-y-auto gap-4 
             md:grid-cols-[3fr_2fr] ax-md:grid-rows-2
           "
           onClick={(e) => e.stopPropagation()}
@@ -85,7 +85,7 @@ export default function PhotoOverlay({
       {children}
       {
         pictures.length > 1 &&
-        <div className="flex gap-[1rem] absolute bottom-4">
+        <div className="flex gap-4 absolute bottom-4">
           <FaChevronCircleLeft
             onClick={e => {nextImage(-1); e.stopPropagation()}}
             className="

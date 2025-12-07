@@ -211,7 +211,7 @@ function Member({ member, index, className = "", ...props }) {
       {/* Image container with professional effects */}
       <div className="relative w-full aspect-[3/4] md:aspect-square overflow-hidden bg-primary-darker/5">
         <Image
-          {...member.img}
+          {...member.img.cropped}
           alt={member.fullname}
           fill
           sizes="(max-width: 768px) 50vw, (max-width: 1024px) 30vw, 20vw"

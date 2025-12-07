@@ -30,14 +30,14 @@ export default async function LinksPage() {
         </div>
 
         {/* Top accent border */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/60 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-secondary/60 to-transparent"></div>
 
         {/* Title */}
         <div className="relative p-10 pb-6 text-center">
           <h1 className="text-white text-3xl font-bold mb-3">
             Useful Links
           </h1>
-          <div className="mt-4 h-px bg-gradient-to-r from-transparent via-secondary/50 to-transparent" />
+          <div className="mt-4 h-px bg-linear-to-r from-transparent via-secondary/50 to-transparent" />
         </div>
 
         {/* Cards Grid */}
@@ -46,7 +46,7 @@ export default async function LinksPage() {
         </div>
 
         {/* Bottom accent border */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
       </div>
     </main>
   );

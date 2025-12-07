@@ -14,8 +14,8 @@ export default function EventPost({event, className="", children, ...props}) {
   return <>
     <div
       className={twJoin(
-        `w-9/10 max-w-[120ch] mx-auto green-glass-container p-[1rem]
-        mb-[2rem] pb-[4rem] grid gap-[1rem] md:grid-cols-[18rem_1fr]
+        `w-9/10 max-w-[120ch] mx-auto green-glass-container p-4
+        mb-8 pb-16 grid gap-4 md:grid-cols-[18rem_1fr]
         grid-cols-1`,
         className
       )}
@@ -24,7 +24,7 @@ export default function EventPost({event, className="", children, ...props}) {
       <div className="h-fit duration-200">
         <Image
           alt=""
-          {...event.img}
+          {...event.img.uncropped}
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
           className="
             object-cover rounded-xl cursor-pointer w-full h-auto
