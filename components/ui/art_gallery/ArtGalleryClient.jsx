@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
 import { RiImageAddFill } from "react-icons/ri";
 import Image from "next/image";
@@ -16,6 +16,20 @@ const indianNames = [
 export default function ArtGalleryClient({ pictures }) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const NEW_ART_FORM_URL = "https://forms.gle/f9jwYsqABvwFXDcB8";
+
+   const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const toggleVisible = () => {
+      if (window.scrollY > 300) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisible);
+    return () => window.removeEventListener("scroll", toggleVisible);
+  }, []);
 
   return (
     <main className="relative min-h-screen pt-32 pb-20">
@@ -110,10 +124,10 @@ export default function ArtGalleryClient({ pictures }) {
           href={NEW_ART_FORM_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-8 right-8 bg-white hover:bg-gray-100 text-gray-900 p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 z-50"
+          className={`fixed bottom-20 right-6 bg-white hover:bg-gray-100 text-gray-900 p-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 z-50 ${visible ? "opacity-100 scale-100" : "opacity-0 scale-0"}`}
           aria-label="Submit your art"
         >
-          <RiImageAddFill size={28} />
+          <RiImageAddFill size={22} />
         </a>
       </div>
     </main>
