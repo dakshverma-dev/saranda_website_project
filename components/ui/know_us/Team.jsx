@@ -6,10 +6,20 @@ import { twJoin } from "tailwind-merge";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa6";
+import { FaLinkedin, FaInstagram, FaGithub, FaFacebook, FaYoutube } from "react-icons/fa6";
+import { TbWorldWww } from "react-icons/tb";
 import { IoMdMail } from "react-icons/io";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const socialMediaIcons = {
+  'github': FaGithub,
+  'linkedin': FaLinkedin,
+  'instagram': FaInstagram,
+  'youtube': FaYoutube,
+  'facebook': FaFacebook,
+  'other': TbWorldWww,
+}
 
 
 export default function Team({ team, className = "", ...props }) {
@@ -211,7 +221,7 @@ function Member({ member, index, className = "", ...props }) {
       {/* Image container with professional effects */}
       <div className="relative w-full aspect-[3/4] md:aspect-square overflow-hidden bg-primary-darker/5">
         <Image
-          {...member.img}
+          {...member.img.cropped}
           alt={member.fullname}
           fill
           sizes="(max-width: 768px) 50vw, (max-width: 1024px) 30vw, 20vw"
@@ -246,18 +256,17 @@ function Member({ member, index, className = "", ...props }) {
         
         {/* Social Media Icons */}
         <div className="pt-2 md:pt-3 flex justify-center gap-1.5 md:gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-1 group-hover:translate-y-0">
-          {member.email && (
-            <SociaLinkIcon Icon={IoMdMail} href={"mailto:" + member.email} aria-label="GitHub"/>
+          {member.email && member.visiblemail && (
+            <SocialLinkIcon Icon={IoMdMail} aria-label="Email" href={"mailto:" + member.email}/>
           )}
-          {member.github && (
-            <SociaLinkIcon Icon={FaGithub} href={member.github} aria-label="GitHub"/>
-          )}
-          {member.linkedin && (
-            <SociaLinkIcon Icon={FaLinkedin} href={member.linkedin} aria-label="LinkedIn"/>
-          )}
-          {member.instagram && (
-            <SociaLinkIcon Icon={FaInstagram} href={member.instagram} aria-label="Instagram"/>
-          )}
+          {member.socials?.map(({socialMedia, url, _key}) => (
+            <SocialLinkIcon
+              key={_key}
+              Icon={socialMediaIcons[socialMedia]}
+              aria-label="GitHub"
+              href={url}
+            />
+          ))}
         </div>
       </div>
 

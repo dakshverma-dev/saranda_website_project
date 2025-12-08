@@ -1,0 +1,48 @@
+import Image from "next/image";
+import mist_forest_img from "@/public/images/mist_forest1.png";
+import MeetupPost from "@/components/ui/meetups/MeetupPost";
+import { getMeetupPosts } from "@/lib/cmsdata";
+import Button from "@/components/ui/Button";
+
+export function generateStaticParams() {
+  const regions = [
+    "patna", "chennai", "mumbai", "chandigarh", "kolkata", "lucknow",
+    "hyderabad", "delhi", "bengaluru",
+  ];
+
+  return regions.map(r => ({ region: r }));
+}
+
+
+export default async function Meetup({ params }) {
+  const { region } = await params;
+  const meetups = await getMeetupPosts(region);
+
+  return <main className="py-20 relative min-h-screen">
+    <div className="absolute inset-0 -z-1">
+      <Image
+        src={mist_forest_img}
+        alt=""
+        sizes="100vw"
+        placeholder="blur"
+        className="object-cover w-screen h-screen sticky top-0"
+      />
+    </div>
+
+    <h2 className="text-center text-primary mb-4 capitalize">
+      {region} region
+    </h2>
+
+    <div className="
+      w-9/10 max-w-[120ch] mx-auto mb-8 -mt-4
+    ">
+      <Button href="/meetups">&lt; Back</Button>
+    </div>
+    {meetups.map(m => <MeetupPost key={m._id} meetup={m}/>)}
+    {(meetups.length == 0) && (
+      <p className="text-center font-medium my-8">
+        No meetups for this region :(
+      </p>
+    )}
+  </main>;
+}

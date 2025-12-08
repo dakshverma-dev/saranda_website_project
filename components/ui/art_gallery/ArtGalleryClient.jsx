@@ -6,16 +6,10 @@ import Image from "next/image";
 import bg3 from "@/public/images/bg3.jpg";
 import PhotoOverlay from "@/components/ui/PhotoOverlay";
 
-const indianNames = [
-  "Aarav Sharma", "Diya Patel", "Arjun Singh", "Ananya Gupta", "Vivaan Kumar",
-  "Aadhya Reddy", "Aditya Mehta", "Saanvi Desai", "Vihaan Joshi", "Ishaan Verma",
-  "Navya Kapoor", "Dhruv Rao", "Myra Shah", "Kabir Nair", "Kiara Malhotra",
-  "Reyansh Agarwal", "Aarohi Banerjee", "Atharv Iyer", "Avni Pandey", "Shaurya Saxena"
-];
 
 export default function ArtGalleryClient({ pictures }) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const NEW_ART_FORM_URL = "https://forms.gle/f9jwYsqABvwFXDcB8";
+  const NEW_ART_FORM_URL = process.env.NEXT_PUBLIC_ART_GALLERY_FORM_LINK;
 
    const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -65,15 +59,14 @@ export default function ArtGalleryClient({ pictures }) {
         </div>
 
         {/* Gallery Grid - Pinterest Style */}
-        {!pictures?.images || pictures.images.length === 0 ? (
+        {!pictures?.artworks || pictures.artworks.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-white/70 text-2xl font-medium">No Art for now :(</p>
             <p className="text-white/50 text-lg mt-2">Be the first to submit!</p>
           </div>
         ) : (
           <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
-            {pictures.images.map((image, index) => {
-              const artistName = indianNames[index % indianNames.length];
+            {pictures.artworks.map((artwork, index) => {
               return (
                 <div
                   key={index}
@@ -81,16 +74,12 @@ export default function ArtGalleryClient({ pictures }) {
                   className="break-inside-avoid mb-4 group relative overflow-hidden rounded-lg bg-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 cursor-pointer"
                 >
                   <Image
-                    src={pictures.img[index]?.src}
-                    alt={image.caption || `Art piece ${index + 1}`}
-                    width={pictures.img[index]?.width || 400}
-                    height={pictures.img[index]?.height || 400}
-                    placeholder={pictures.img[index]?.placeholder}
-                    blurDataURL={pictures.img[index]?.blurDataURL}
+                    {...pictures.img[index].uncropped}
+                    alt=""
                     className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4">
+                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4">
                     <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                       <p className="text-white/90 text-xs font-medium mb-1 flex items-center gap-2">
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -98,10 +87,10 @@ export default function ArtGalleryClient({ pictures }) {
                         </svg>
                         Created by
                       </p>
-                      <p className="text-white font-bold text-lg mb-2">{artistName}</p>
-                      {image.caption && (
+                      <p className="text-white font-bold text-lg mb-2">{artwork.artist}</p>
+                      {artwork.caption && (
                         <p className="text-white/80 text-sm line-clamp-2">
-                          {image.caption}
+                          {artwork.caption}
                         </p>
                       )}
                     </div>
@@ -115,7 +104,7 @@ export default function ArtGalleryClient({ pictures }) {
         {/* Photo Overlay for fullscreen view */}
         <PhotoOverlay
           pictures={pictures.img}
-          captions={pictures.images?.map(p => p?.caption) || []}
+          captions={pictures.artworks?.map(p => p?.caption) || []}
           selectedIndex={selectedIndex}
           setSelectedIndex={setSelectedIndex}
         />

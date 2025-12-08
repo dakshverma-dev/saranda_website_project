@@ -20,16 +20,19 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'picsum.photos',
       },
-      {
-        protocol: 'https',
-        hostname: 'placehold.co',
-      },
     ],
+    dangerouslyAllowLocalIP: true,
   },
 
   experimental: {
     globalNotFound: true,
-  }
+  },
+  
+  logging: {
+    fetches: {
+      fullUrl: true,
+    }
+  },
 };
 
 export default withPlaiceholder(nextConfig);

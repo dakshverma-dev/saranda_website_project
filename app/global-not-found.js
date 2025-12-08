@@ -1,6 +1,6 @@
 import { Roboto } from "next/font/google";
 import localFont from "next/font/local";
-import "./(frontend)/globals.css";
+import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Button from "@/components/ui/Button";
@@ -10,7 +10,7 @@ import bg404_img from "@/public/images/bg404.png";
 import { RiHome9Fill } from "react-icons/ri";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { MdEmojiPeople } from "react-icons/md";
-import { FaPaintBrush } from "react-icons/fa";
+import { FaExternalLinkAlt, FaPaintBrush } from "react-icons/fa";
 import { SiHomeassistantcommunitystore } from "react-icons/si";
 import { IoMdMicrophone } from "react-icons/io";
 import { getCommunityLinks } from "@/lib/cmsdata";
@@ -64,7 +64,12 @@ export default async function LostPage() {
         href: `/community/${c.slug}`,
         text: c.slug,
       }))
-    }
+    },
+    {
+      href: "/links",
+      icon: <FaExternalLinkAlt/>,
+      text: "Links",
+    },
   ]
 
   return (
