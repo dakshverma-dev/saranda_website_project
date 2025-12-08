@@ -6,10 +6,20 @@ import { twJoin } from "tailwind-merge";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa6";
+import { FaLinkedin, FaInstagram, FaGithub, FaFacebook, FaYoutube } from "react-icons/fa6";
+import { TbWorldWww } from "react-icons/tb";
 import { IoMdMail } from "react-icons/io";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const socialMediaIcons = {
+  'github': FaGithub,
+  'linkedin': FaLinkedin,
+  'instagram': FaInstagram,
+  'youtube': FaYoutube,
+  'facebook': FaFacebook,
+  'other': TbWorldWww,
+}
 
 
 export default function UHC({ team, className = "", ...props }) {
@@ -169,7 +179,7 @@ function Member({ member, index, className = "", ...props }) {
 
 function GradientOverlay() {
   return <>
-    <div className="absolute inset-0 bg-gradient-to-t from-primary-darker/70 via-transparent to-transparent" />
+    <div className="absolute inset-0 bg-linear-to-t from-primary-darker/70 via-transparent to-transparent" />
   </>
 }
 
@@ -189,18 +199,17 @@ function ShineOverlay() {
 function SocialMediaIcons({member}) {
   return <>
     <div className="pt-4 flex justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
-      {member.email && (
+      {member.email && member.visiblemail && (
         <SocialLinkIcon Icon={IoMdMail} aria-label="Email" href={"mailto:" + member.email}/>
       )}
-      {member.github && (
-        <SocialLinkIcon Icon={FaGithub} aria-label="GitHub" href={member.github}/>
-      )}
-      {member.linkedin && (
-        <SocialLinkIcon Icon={FaLinkedin} aria-label="LinkedIn" href={member.linkedin}/>
-      )}
-      {member.instagram && (
-        <SocialLinkIcon Icon={FaInstagram} aria-label="Instagram" href={member.instagram}/>
-      )}
+      {member.socials?.map(({socialMedia, url, _key}) => (
+        <SocialLinkIcon
+          key={_key}
+          Icon={socialMediaIcons[socialMedia]}
+          aria-label="GitHub"
+          href={url}
+        />
+      ))}
     </div>
   </>
 }

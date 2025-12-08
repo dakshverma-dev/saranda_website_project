@@ -33,9 +33,10 @@ export default function EventPost({event, className="", children, ...props}) {
           onClick={e => setSelectedIndex(0)}
         />
       </div>
+
       <div>
-        <h3 className="mb-[0.5rem]">{event.eventname}</h3>
-        <div className="mb-[1rem] *:min-h-[1rem]">
+        <h3 className="mb-2">{event.eventname}</h3>
+        <div className="mb-4 *:min-h-4">
           <PortableText value={event.description}/>
         </div>
         {event.links && event.links.map(

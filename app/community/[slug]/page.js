@@ -1,7 +1,13 @@
 import Button from "@/components/ui/Button";
-import { getCommunity } from "@/lib/cmsdata";
+import { getCommunity, getCommunityLinks } from "@/lib/cmsdata";
 import Image from "next/image";
 import Link from "next/link";
+
+export async function generateStaticParams() {
+  const communityLinks = await getCommunityLinks();
+
+  return communityLinks.map(l => ({ slug: l.slug }));
+}
 
 
 export default async function Community({ params }) {

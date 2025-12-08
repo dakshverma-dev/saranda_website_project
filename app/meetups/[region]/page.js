@@ -4,6 +4,15 @@ import MeetupPost from "@/components/ui/meetups/MeetupPost";
 import { getMeetupPosts } from "@/lib/cmsdata";
 import Button from "@/components/ui/Button";
 
+export function generateStaticParams() {
+  const regions = [
+    "patna", "chennai", "mumbai", "chandigarh", "kolkata", "lucknow",
+    "hyderabad", "delhi", "bengaluru",
+  ];
+
+  return regions.map(r => ({ region: r }));
+}
+
 
 export default async function Meetup({ params }) {
   const { region } = await params;
@@ -19,9 +28,11 @@ export default async function Meetup({ params }) {
         className="object-cover w-screen h-screen sticky top-0"
       />
     </div>
+
     <h2 className="text-center text-primary mb-4 capitalize">
       {region} region
     </h2>
+
     <div className="
       w-9/10 max-w-[120ch] mx-auto mb-8 -mt-4
     ">
