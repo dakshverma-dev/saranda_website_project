@@ -9,7 +9,7 @@ import PhotoOverlay from "@/components/ui/PhotoOverlay";
 
 export default function ArtGalleryClient({ pictures }) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const NEW_ART_FORM_URL = "https://forms.gle/f9jwYsqABvwFXDcB8";
+  const NEW_ART_FORM_URL = process.env.NEXT_PUBLIC_ART_GALLERY_FORM_LINK;
 
    const [visible, setVisible] = useState(false);
   useEffect(() => {

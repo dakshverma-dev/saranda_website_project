@@ -85,7 +85,7 @@ export default async function RootLayout({ children }) {
         text: c.slug,
       }))
     },
-     {
+    {
       href: "/links",
       icon: <FaExternalLinkAlt/>,
       text: "Links",
