@@ -284,7 +284,7 @@ function Member({ member, index, className = "", ...props }) {
 }
 
 
-function SociaLinkIcon({Icon, ...props}) {
+function SocialLinkIcon({Icon, ...props}) {
   return (
     <Link
       target="_blank"
