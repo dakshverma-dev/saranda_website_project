@@ -30,7 +30,7 @@ export async function POST(req) {
   }
   
   const paths = revalidationPaths[data.type];
-  const layoutPaths = revalidationLayoutPaths[data.type];
+  const layoutPaths = revalidationLayoutPaths[data.type] || [];
 
   if (!paths) {
     return new NextResponse(JSON.stringify({
