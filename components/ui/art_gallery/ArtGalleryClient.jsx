@@ -11,7 +11,7 @@ export default function ArtGalleryClient({ pictures }) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const NEW_ART_FORM_URL = process.env.NEXT_PUBLIC_ART_GALLERY_FORM_LINK;
 
-   const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     const toggleVisible = () => {
       if (window.scrollY > 300) {
@@ -51,7 +51,7 @@ export default function ArtGalleryClient({ pictures }) {
           </p>
           <Button
             href={NEW_ART_FORM_URL}
-            className="px-6 py-3 bg-white/90 hover:bg-white text-gray-900 font-semibold rounded-lg transition-all shadow-lg"
+            className="px-6 py-3 bg-white/90 hover:bg-yellow-400 hover:scale-105 active:scale-95 text-gray-900 font-semibold rounded-lg transition-all duration-300 shadow-lg"
             target="blank"
           >
             Submit your art <RiImageAddFill size={20} className="inline ml-2" />
@@ -108,7 +108,7 @@ export default function ArtGalleryClient({ pictures }) {
           selectedIndex={selectedIndex}
           setSelectedIndex={setSelectedIndex}
         />
-        
+
         <a
           href={NEW_ART_FORM_URL}
           target="_blank"
