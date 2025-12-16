@@ -12,10 +12,10 @@ export default async function EventsPage({ params }) {
     </h2>
 
     <div className="w-9/10 max-w-[120ch] mx-auto mb-8 -mt-4">
-      <Button href="/events/current">&lt; Back</Button>
+      <Button href="/events/current">&lt; Current Events</Button>
     </div>
 
-    {events.map(e => <EventPost event={e} key={e._id}/>)}
+    {events.map(e => <EventPost event={e} key={e._id} />)}
 
     {(events.length == 0) && (
       <p className="text-center my-8 font-medium">
